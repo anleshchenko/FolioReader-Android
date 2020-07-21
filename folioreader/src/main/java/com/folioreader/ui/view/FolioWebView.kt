@@ -800,4 +800,9 @@ class FolioWebView : WebView {
         if (!destroyed)
             uiHandler.postDelayed(isScrollingRunnable, IS_SCROLLING_CHECK_TIMER.toLong())
     }
+
+    fun scrollToChapterProgression(progression: Double) =
+        evaluateJavascript("scrollToChapterProgression($progression)") {
+            Log.d(LOG_TAG, "-> scrollToChapterProgression")
+        }
 }
