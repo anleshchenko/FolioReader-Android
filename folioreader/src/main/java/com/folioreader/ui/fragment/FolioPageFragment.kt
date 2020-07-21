@@ -488,6 +488,9 @@ class FolioPageFragment : Fragment(),
                     loadingView!!.hide()
                 }
             }
+            mActivityCallback?.currentLocator?.locations?.progression?.let {
+                mWebview!!.scrollToChapterProgression(it)
+            }
         }
 
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {

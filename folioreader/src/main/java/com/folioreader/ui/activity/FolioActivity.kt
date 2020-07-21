@@ -64,9 +64,11 @@ import com.folioreader.ui.view.FolioAppBarLayout
 import com.folioreader.ui.view.MediaControllerCallback
 import com.folioreader.util.AppUtil
 import com.folioreader.util.FileUtil
+import com.folioreader.util.PublicationPagesUtil
 import com.folioreader.util.UiUtil
 import org.greenrobot.eventbus.EventBus
 import org.readium.r2.shared.Link
+import org.readium.r2.shared.Locator
 import org.readium.r2.shared.Publication
 import org.readium.r2.streamer.parser.CbzParser
 import org.readium.r2.streamer.parser.EpubParser
@@ -181,6 +183,8 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
         } else {
             null
         }
+
+    private var locator: Locator? = null
 
     enum class EpubSourceType {
         RAW,
@@ -534,6 +538,13 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
 
         configFolio()
     }
+
+    fun openOnLocator(locator: Locator) {
+        this.locator = locator
+        goToChapter(locator.href)
+    }
+
+    override fun getCurrentLocator() = locator
 
     override fun getStreamerUrl(): String {
 

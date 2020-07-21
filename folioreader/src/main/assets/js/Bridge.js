@@ -938,3 +938,25 @@ function rectContains(a, b) {
         // now check for containment
         && a.left <= b.left && a.top <= b.top && a.right >= b.right && a.bottom >= b.bottom;
 }
+
+function scrollToChapterProgression(progression) {
+    console.log("scrollToChapterProgression " + progression);
+    if ((progression < 0) || (progression > 1)) {
+        console.log("Invalid progression");
+        return;
+    }
+
+    var offset = document.scrollingElement.scrollWidth * progression;
+
+    var clientWidth = document.documentElement.clientWidth;
+    var pageIndex = Math.floor(offset / clientWidth);
+    WebViewPager.setCurrentPage(pageIndex);
+
+    document.scrollingElement.scrollLeft = snapOffset(offset);
+}
+
+function snapOffset(offset) {
+    var value = offset + 1;
+
+    return value - (value % window.innerWidth);
+}
